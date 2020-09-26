@@ -23,7 +23,6 @@ def create_deck(filename):
     return deck
 
 if __name__ == "__main__":
-    OPTIONS = ['a','b']
     total_wins = {}
 
     parser = argparse.ArgumentParser(description="Run game simulation")
