@@ -1,3 +1,6 @@
+OPTION_A = 'a'
+OPTION_B = 'b'
+
 class Card():
     def __init__(self, card_info):
         self._card_number = card_info['#']
@@ -12,13 +15,13 @@ class Card():
         Returns the dict containing the roles and point values for a specified card option
         
         Parameters:
-        option(str): character representing either option 'a' or option 'b'
-
+        option(constant): Constant value. Either OPTION_A or OPTION_B
+        
         Returns: 
         dict: corresponding dictionary of roles and point values for the 
               specified card option
         '''
-        if option.lower() == 'a':
+        if option == OPTION_A:
             return self._option_a
         else: 
             return self._option_b
