@@ -5,11 +5,13 @@ from csv import DictReader, DictWriter
 
 OPTION_A = "Yea Vote (Op A) Results"
 OPTION_B = "Nay Vote (Op B) Results" 
+CARDS_DRAWN_PER_ROUND = 4
 # Output file fields
 GAME = "game"
 SCORES = "scores"
 WINNER = "winner"
 CARDS_CHOSEN = "cards_chosen"
+
             
 def create_deck(filename):
     '''
@@ -44,7 +46,6 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Run game simulation")
     parser.add_argument("filename", help="text file containing card descriptions")
-    parser.add_argument("players", help="number of players", type=int)
     parser.add_argument("rounds", help="number of rounds", type=int)
     parser.add_argument("games", help="number of games to simulate", type=int)
     parser.add_argument("-weight", "-w", default=.5, help="set weight for option A (which also sets weight for b). value should be between 0.0 and 1.0", type=float)
@@ -57,8 +58,8 @@ if __name__ == "__main__":
     print("==========================")
     print("THE COUNCIL GAME SIMULATOR")
     print("==========================")
-    print("Players:{} | Rounds:{} | Games:{} | Weighting:{}".format(
-        args.players, args.rounds, args.games, args.weight))
+    print("Rounds:{} | Games:{} | Weighting:{}".format(
+        args.rounds, args.games, args.weight))
 
     total_wins = {}
     deck = create_deck(args.filename)
@@ -69,7 +70,7 @@ if __name__ == "__main__":
         output_writer.writeheader()
 
         for game in range(args.games):
-            cards_drawn = sample(deck.keys(), args.players*args.rounds)
+            cards_drawn = sample(deck.keys(), CARDS_DRAWN_PER_ROUND*args.rounds)
             game_score = {}
             cards_drawn_info = [] # I'm sure there's a better way to save this info
             for card in cards_drawn:
